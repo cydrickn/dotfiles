@@ -57,7 +57,7 @@ $ git clone https://github.com/cydrickn/dotfiles.git
 Copy the files to ~/
 
 ```bash
-$ cp -a ~/dotfiles/ ~/
+$ cp -rT ~/dotfiles/ ~/
 ```
 
 **Step3**

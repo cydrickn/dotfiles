@@ -224,11 +224,28 @@ deploypolybar () {
 	EOF
 
 	read -d '' polybartaskbar <<- EOF
-	[format]
+	[main]
 	output = <output>
-	item = %{A1:xdotool windowactivate <id>:}        <name>        %{A}
 	separator =
-	active = %{B${ALTBLACK}}        <name>        %{B-}
+	max-items = 8
+	[item]
+	format-inactive = <label>
+	format-active = <label>
+	click-left-inactive = xdotool windowactivate %wid%
+	;click-right-active =
+	label-active = %name%
+	label-active-padding = 24
+	label-active-minlen = 32
+	label-active-alignment = center
+	label-active-maxlen = 32
+	label-active-ellipsis = true
+	label-active-background = ${ALTBLACK}
+	label-inactive = %name%
+	label-inactive-padding = 24
+	label-inactive-minlen = 32
+	label-inactive-alignment = center
+	label-inactive-maxlen = 32
+	label-inactive-ellipsis = true
 	EOF
 }
 
