@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# A simple script to do screenrecord using ffmpeg
+# Install ffmpeg first if You didn't have
+# I usually launch this script using rofi
+# Cheers! Addy
+
+slop=$(slop -f "%x %y %w %h %g %i") || exit 1
+
+read -r X Y W H G ID < <(echo $slop)
+
+notify-send "Screen Recording Started"
+filename=~/Videos/Videos_$(date +"%Y%m%d%H%M%S").mkv
+
+ffmpeg -f x11grab \
+-s "$W"x"$H" \
+-an -i :0.0+$X,$Y \
+-c:v libvpx \
+-b:v 5M \
+-crf 10 \
+-quality realtime \
+-y $filename
+
+notify-send "Screen Recording have been stoped. Recorded screen was save to $filename"

@@ -1,0 +1,2 @@
+export DOTCONFIG=$HOME/.config
+export DOTSCRIPTS=$HOME/.scripts
