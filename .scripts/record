@@ -14,7 +14,7 @@ filename=~/Videos/Videos_$(date +"%Y%m%d%H%M%S").mkv
 
 ffmpeg -f x11grab \
 -s "$W"x"$H" \
--an -i :0.0+$X,$Y \
+-an -i +$X,$Y \
 -c:v libvpx \
 -b:v 5M \
 -crf 10 \
