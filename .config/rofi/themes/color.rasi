@@ -1,0 +1,28 @@
+* {
+    core-background: #343c48;
+    core-foreground: #e0e0e0;
+
+    black-dark: #616161;
+    back-light: #757575;
+
+    red-dark: #f06292;
+    red-light: #f48fb1;
+
+    green-dark: #c5e1a5;
+    green-light: #dcedc8;
+
+    yellow-dark: #ffe0b2;
+    yellow-light: #fff3e0;
+
+    blue-dark: #80cbc4;
+    blue-light: #b2dfdb;
+
+    magenta-dark: #ce93d8;
+    magenta-light: #e1bee7;
+
+    cyan-dark: #80deea;
+    cyan-light: #b2ebf2;
+
+    white-dark: #bdbdbd;
+    white-light: #e0e0e0;
+}

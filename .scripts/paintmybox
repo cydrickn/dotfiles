@@ -3,8 +3,8 @@
 checkup () {
 	# Create paintmybox theme folder if doesn't exist
 	if [ ! -d "$HOME/.themes/paintmybox/" ]; then
-		mkdir ~/.themes/paintmybox/
-		mkdir ~/.themes/paintmybox/openbox-3/
+		mkdir -p ~/.themes/paintmybox/
+		mkdir -p ~/.themes/paintmybox/openbox-3/
 	fi
 	# Create dunst folder if doesn't exist
 	if [ ! -d "$HOME/.config/dunst" ]; then
@@ -25,6 +25,10 @@ checkup () {
 	# Remove previous generated dunst theme
 	if [ -e ~/.config/tint2/dunstrc ]; then
 		rm ~/.config/tint2/dunstrc
+	fi
+	# Remove previous generated rofi applet colors
+	if [ -e ~/.config/rofi/themes/color.rasi ]; then
+		rm ~/.config/rofi/themes/color.rasi
 	fi
 }
 
@@ -249,6 +253,39 @@ deploypolybar () {
 	EOF
 }
 
+rofiapplets () {
+	read -d '' rofiappletscolors <<- EOF
+	* {
+		core-background: ${BACKGROUND};
+		core-foreground: ${FOREGROUND};
+
+		black-dark: ${BLACK};
+		back-light: ${ALTBLACK};
+
+		red-dark: ${RED};
+		red-light: ${ALTRED};
+
+		green-dark: ${GREEN};
+		green-light: ${ALTGREEN};
+
+		yellow-dark: ${YELLOW};
+		yellow-light: ${ALTYELLOW};
+
+		blue-dark: ${BLUE};
+		blue-light: ${ALTBLUE};
+
+		magenta-dark: ${MAGENTA};
+		magenta-light: ${ALTMAGENTA};
+
+		cyan-dark: ${CYAN};
+		cyan-light: ${ALTCYAN};
+
+		white-dark: ${WHITE};
+		white-light: ${ALTWHITE};
+	}
+	EOF
+}
+
 deploydunst () {
 	read -d '' dunstrc <<- EOF
 	[global]
@@ -356,11 +393,14 @@ main () {
 	deploytheme
 	deploypolybar
 	deploydunst
+	rofiapplets
+	fc-cache -v
 	echo "$paintmyboxcache" > ~/.cache/paintmyboxcache
 	echo "$themerc" > ~/.themes/paintmybox/openbox-3/themerc
 	echo "$polybarcolors" > ~/.config/polybar/colors.ini
 	echo "$polybartaskbar" > ~/.config/polybar/tasksbar.ini
 	echo "$dunstrc" > ~/.config/dunst/dunstrc
+	echo "$rofiappletscolors" > ~/.config/rofi/themes/color.rasi
 	dunst -format "<b>%s</b>\n%b" &
 	sendescape &
 	wallpaperpick

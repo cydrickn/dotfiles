@@ -1,0 +1,41 @@
+configuration {
+  /*show-icons: true;*/
+  cycle: false;
+}
+
+@import "color.rasi"
+
+* {
+  /* General */
+  text-font: "Noto Sans 8";
+  icon-font: "cydrickn 40";
+  icon-font-small: "cydrickn 24";
+
+  option-6-listview-spacing: 10px;
+  background-color: @core-background;
+}
+
+window {
+  location:	 south east;
+  height:		 160px;
+  width:		 120px;
+  x-offset: -16px;
+  y-offset: -36px;
+  children:	 [mainbox];
+}
+
+inputbar { enabled: false; }
+
+listview {
+  orientation: vertical;
+}
+
+element {
+  font: @text-font;
+  text-color: @white-light;
+  padding: 12px;
+}
+
+element selected.normal {
+  background-color: @red-dark;
+}

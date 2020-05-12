@@ -1,0 +1,27 @@
+#!/bin/bash
+
+shutdown='<span face="cydrickn"></span>   Shutdown'
+reboot='<span face="cydrickn"></span>   Reboot'
+switch='<span face="cydrickn"></span>   Switch User'
+logout='<span face="cydrickn"></span>   Logout'
+options="$switch\n$logout\n$reboot\n$shutdown"
+
+chosen="$(echo -e "$options" | rofi -display-window -no-lazy-grab -markup-rows -config .config/rofi/themes/powermenu.rasi -font "Noto Sans 8" -dmenu)"
+case $chosen in
+  $shutdown)
+    notify-send "Start shutting down."
+    systemctl poweroff
+    ;;
+  $reboot)
+  notify-send "Start rebooting."
+    systemctl reboot
+    ;;
+  $switch)
+    notify-send "Switching to another user."
+    dm-tool switch-to-greeter
+    ;;
+  $logout)
+    notify-send "Logging out"
+    openbox --exit
+    ;;
+esac
