@@ -187,6 +187,101 @@ deploytheme () {
 	EOF
 }
 
+deploytint2 () {
+	read -d '' tint2bg <<- EOF
+	# Background 1: Active taskbar, Inactive taskbar
+	rounded = 0
+	border_width = 0
+	border_sides = TBLR
+	border_content_tint_weight = 0
+	background_content_tint_weight = 0
+	background_color = ${BACKGROUND} 255
+	border_color = #d8d8d8 30
+	background_color_hover = #d8d8d8 30
+	border_color_hover = #d8d8d8 30
+	background_color_pressed = #d8d8d8 30
+	border_color_pressed = #d8d8d8 30
+
+	# Background 2: Tooltip
+	rounded = 0
+	border_width = 0
+	border_sides = TBLR
+	border_content_tint_weight = 0
+	background_content_tint_weight = 0
+	background_color = ${BACKGROUND} 100
+	border_color = #2f343f 100
+	background_color_hover = #2f343f 100
+	border_color_hover = #2f343f 100
+	background_color_pressed = #2f343f 100
+	border_color_pressed = #2f343f 100
+
+	# Background 3: Active desktop name, Clock, Inactive desktop name
+	rounded = 0
+	border_width = 0
+	border_sides = TBLR
+	border_content_tint_weight = 0
+	background_content_tint_weight = 0
+	background_color = ${MAGENTA} 255
+	border_color = #d8bfd8 71
+	background_color_hover = #d8bfd8 71
+	border_color_hover = #d8bfd8 71
+	background_color_pressed = #d8bfd8 71
+	border_color_pressed = #d8bfd8 71
+
+	# Background 4: Panel
+	rounded = 0
+	border_width = 0
+	border_sides = TBLR
+	border_content_tint_weight = 0
+	background_content_tint_weight = 0
+	background_color = #2f343f 59
+	border_color = #2f343f 59
+	background_color_hover = #2f343f 59
+	border_color_hover = #2f343f 59
+	background_color_pressed = #2f343f 59
+	border_color_pressed = #2f343f 59
+
+	# Background 5: Executor, Separator
+	rounded = 0
+	border_width = 0
+	border_sides = TBLR
+	border_content_tint_weight = 0
+	background_content_tint_weight = 0
+	background_color = #d8bfd8 71
+	border_color = #d8bfd8 71
+	background_color_hover = #d8bfd8 71
+	border_color_hover = #d8bfd8 71
+	background_color_pressed = #d8bfd8 71
+	border_color_pressed = #d8bfd8 71
+
+	# Background 6: Active task
+	rounded = 0
+	border_width = 0
+	border_sides = TBLR
+	border_content_tint_weight = 0
+	background_content_tint_weight = 0
+	background_color = ${ALTBLACK} 255
+	border_color = #d8d8d8 30
+	background_color_hover = #d8d8d8 30
+	border_color_hover = #d8d8d8 30
+	background_color_pressed = #d8d8d8 30
+	border_color_pressed = #d8d8d8 30
+
+	# Background 7: Dark Red
+	rounded = 0
+	border_width = 0
+	border_sides = TBLR
+	border_content_tint_weight = 0
+	background_content_tint_weight = 0
+	background_color = ${RED} 255
+	border_color = #d8d8d8 30
+	background_color_hover = #d8d8d8 30
+	border_color_hover = #d8d8d8 30
+	background_color_pressed = #d8d8d8 30
+	border_color_pressed = #d8d8d8 30
+	EOF
+}
+
 deploypolybar () {
 	read -d '' polybarcolors <<- EOF
 	[colors]
@@ -386,15 +481,15 @@ wallpaperpick () {
 
 main () {
 	checkup
-	killall -9 polybar dunst
+	killall -9 dunst tint2
 	colorpick
 	getcolors
 	cachecolors
 	deploytheme
-	deploypolybar
+	deploytint2
+	# deploypolybar
 	deploydunst
 	rofiapplets
-	fc-cache -v
 	echo "$paintmyboxcache" > ~/.cache/paintmyboxcache
 	echo "$themerc" > ~/.themes/paintmybox/openbox-3/themerc
 	echo "$polybarcolors" > ~/.config/polybar/colors.ini
@@ -405,7 +500,9 @@ main () {
 	sendescape &
 	wallpaperpick
 	openbox --reconfigure
-	polybar -c $HOME/.config/polybar/config.ini main &
+	TINT2BACKGROUND="$tint2bg" envsubst '${TINT2BACKGROUND}' < ~/.config/tint2/themes/theme1.tin2rc > ~/.config/tint2/tint2rc
+	tint2 &
+	# polybar -c $HOME/.config/polybar/config.ini main &
 }
 
 main

@@ -14,7 +14,7 @@ Here are the requirements for you to properly use this dotfiles
 |------|----------|-------------|
 | Openbox | No | Window Manager | 
 | Nato Sans | Yes | Font |
-| Polybar | Yes | Status Bar |
+| Tint2 | Yes | Task Bar |
 | Rofi | Yes | Use for Alt+Tab Selection and Application luncher |
 | dunst | Yes | Use for notification |
 | vim | No | Editor |
