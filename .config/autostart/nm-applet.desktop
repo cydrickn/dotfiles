@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=nm-applet
+GenericName=Network Manager Applet
+Exec=nm-applet --no-agent --indicator
+Terminal=false
+Type=Application
+StartupNotify=false

@@ -282,72 +282,6 @@ deploytint2 () {
 	EOF
 }
 
-deploypolybar () {
-	read -d '' polybarcolors <<- EOF
-	[colors]
-	; core
-	core.foreground     = ${FOREGROUND}
-	core.background     = ${BACKGROUND}
-	core.cursorColor    = #9575cd
-
-	; black
-	black.dark          = ${BLACK}
-	black.light         = ${ALTBLACK}
-
-	red.dark            = ${RED}
-	red.light           = ${ALTRED}
-
-	; green
-	green.dark          = ${GREEN}
-	green.light         = ${ALTGREEN}
-
-	; yellow
-	yellow.dark         = ${YELLOW}
-	yellow.light        = ${ALTYELLOW}
-
-	; blue
-	blue.dark           = ${BLUE}
-	blue.light          = ${ALTBLUE}
-
-	; magenta
-	magenta.dark        = ${MAGENTA}
-	magenta.light       = ${ALTMAGENTA}
-
-	; cyan
-	cyan.dark           = ${CYAN}
-	cyan.light          = ${ALTCYAN}
-
-	; white
-	white.dark          = ${WHITE}
-	white.light         = ${ALTWHITE}
-	EOF
-
-	read -d '' polybartaskbar <<- EOF
-	[main]
-	output = <output>
-	separator =
-	max-items = 8
-	[item]
-	format-inactive = <label>
-	format-active = <label>
-	click-left-inactive = xdotool windowactivate %wid%
-	;click-right-active =
-	label-active = %name%
-	label-active-padding = 24
-	label-active-minlen = 32
-	label-active-alignment = center
-	label-active-maxlen = 32
-	label-active-ellipsis = true
-	label-active-background = ${ALTBLACK}
-	label-inactive = %name%
-	label-inactive-padding = 24
-	label-inactive-minlen = 32
-	label-inactive-alignment = center
-	label-inactive-maxlen = 32
-	label-inactive-ellipsis = true
-	EOF
-}
-
 rofiapplets () {
 	read -d '' rofiappletscolors <<- EOF
 	* {
@@ -502,7 +436,6 @@ main () {
 	openbox --reconfigure
 	TINT2BACKGROUND="$tint2bg" envsubst '${TINT2BACKGROUND}' < ~/.config/tint2/themes/theme1.tin2rc > ~/.config/tint2/tint2rc
 	tint2 &
-	# polybar -c $HOME/.config/polybar/config.ini main &
 }
 
 main
